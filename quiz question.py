@@ -36,13 +36,13 @@ class Quiz:
         print(f"Quiz completed. Your score: {score}/{len(self.questions)}")
 
 # Create quiz questions
-question1 = Question("What is the capital of France?",
-                    ["Paris", "Berlin", "Madrid", "Rome"],
-                    "Paris")
+question1 = Question("What is the capital of india?",
+                    ["Paris", "delhi", "Madrid", "Rome"],
+                    "delhi")
 
-question2 = Question("Which planet is known as the 'Red Planet'?",
-                    ["Mars", "Venus", "Jupiter", "Saturn"],
-                    "Mars")
+question2 = Question("Which planet is nearer to sun'?",
+                    ["Mars", "Venus", "mercury", "Saturn"],
+                    "Marcury")
 
 # Create a quiz and add questions
 quiz = Quiz()
