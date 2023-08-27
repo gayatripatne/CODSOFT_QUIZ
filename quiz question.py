@@ -1,34 +1,53 @@
+
 class Question:
-    def __init__(self, question, options, correct_option):
-        self.question = question
+    def __init__(self, prompt, options, answer):
+        self.prompt = prompt
         self.options = options
-        self.correct_option = correct_option
+        self.answer = answer
 
-    def ask_question(self):
-        print(self.question)
-        for index, option in enumerate(self.options):
-            print(f"{index + 1}. {option}")
-        
-        user_choice = int(input("Enter your answer "))
-        return user_choice == self.correct_option
+class Quiz:
+    def __init__(self):
+        self.questions = []
 
+    def add_question(self, question):
+        self.questions.append(question)
 
-def main():
-    question1 = Question("Who is the first prime minister of india?", ["Jawaharlal Nehru", "Indira Gandhi", "Narendra Modi","Mahatma Gandhi"], Jawaharlal Nehru)
-    question2 = Question("India got independence in which year?", ["1956", "1946", "1947", "2000"], 1947)
-    question3 = Question("Who is also known as Shaheed-e-Azam?" , ["Bhagat Singh", "Rajguru", "Sukhdev", "Netaji Bose"], Bhagat Singh)
-    question4 = Question("Codeword use by  captain vikram batra is  ",["dil to hai","dil mange more","bharat mata ki jay","vande mataram"], dil mange more)
-    questions = [question1, question2, question3,question4]
-    
-    score = 0
-    for question in questions:
-        if question.ask_question():
-            print("Correct!\n")
-            score += 1
-        else:
-            print("Incorrect.\n")
-    
-    print(f"Your  {score} is {len(questions)} questions correct!")
+    def run_quiz(self):
+        score = 0
+        for i, question in enumerate(self.questions, 1):
+            print(f"Question {i}: {question.prompt}")
+            for j, option in enumerate(question.options, 1):
+                print(f"{j}. {option}")
+            
+            user_answer = input("Your answer (enter the option number): ")
+            try:
+                user_answer_index = int(user_answer) - 1
+                if 0 <= user_answer_index < len(question.options):
+                    if question.options[user_answer_index] == question.answer:
+                        print("Correct!\n")
+                        score += 1
+                    else:
+                        print(f"Wrong! The correct answer is {question.answer}.\n")
+                else:
+                    print("Invalid option number. Skipping this question.\n")
+            except ValueError:
+                print("Invalid input. Skipping this question.\n")
 
-if __name__ == "__main__":
-    main()
+        print(f"Quiz completed. Your score: {score}/{len(self.questions)}")
+
+# Create quiz questions
+question1 = Question("What is the capital of France?",
+                    ["Paris", "Berlin", "Madrid", "Rome"],
+                    "Paris")
+
+question2 = Question("Which planet is known as the 'Red Planet'?",
+                    ["Mars", "Venus", "Jupiter", "Saturn"],
+                    "Mars")
+
+# Create a quiz and add questions
+quiz = Quiz()
+quiz.add_question(question1)
+quiz.add_question(question2)
+
+# Run the quiz
+quiz.run_quiz()
